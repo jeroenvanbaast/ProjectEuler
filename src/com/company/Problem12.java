@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 
+// TODO: Should be more elegant solution then to bruteforce it.
 public class Problem12 {
 
     public static void main(String... args) {
