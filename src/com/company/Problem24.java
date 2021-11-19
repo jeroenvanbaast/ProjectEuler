@@ -1,26 +1,52 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+
 public class Problem24 {
 
     // 012   021   102   120   201   210
     public static void main(String... args) {
-//        int[] t = new int[]{0,1,2,3,4,5,6,7,8,9};
-        int[] t = new int[]{0, 1, 2};
-        int[] k = new int[]{0, 1, 2};
-        for (int i = 0; i < 6; i++) {
-            System.out.println(k[0] + " " + k[1] + " " + k[2]);
-            k = next(k);
-        }
+        Problem24 p = new Problem24();
+        p.solution(10);
     }
 
-    public static int[] next(int[] k){
-        int j = 0;
-        for(int i : k){
-            if(i>j){
-                j=i;
+    // Brute force
+    public String solution(int a) {
+        int count = 0;
+        for (int i = 0; i < a; i++) {
+            for (int ii = 0; ii < a; ii++) {
+                for (int iii = 0; iii < a; iii++) {
+                    for (int iiii = 0; iiii < a; iiii++) {
+                        for (int iiiii = 0; iiiii < a; iiiii++) {
+                            for (int iiiiii = 0; iiiiii < a; iiiiii++) {
+                                for (int iiiiiii = 0; iiiiiii < a; iiiiiii++) {
+                                    for (int iiiiiiii = 0; iiiiiiii < a; iiiiiiii++) {
+                                        for (int iiiiiiiii = 0; iiiiiiiii < a; iiiiiiiii++) {
+                                            for (int iiiiiiiiii = 0; iiiiiiiiii < a; iiiiiiiiii++) {
+                                                HashSet<Integer> test = new HashSet<Integer>(Arrays.asList(i, ii, iii, iiii, iiiii, iiiiii, iiiiiii, iiiiiiii, iiiiiiiii, iiiiiiiiii));
+                                                if (test.size() == 10) {
+                                                    count++;
+                                                }
+                                                if(count == 1_000_000){
+                                                    System.out.println("" + i + ii + iii + iiii + iiiii + iiiiii + iiiiiii + iiiiiiii + iiiiiiiii + iiiiiiiiii);
+                                                    System.out.println(count);
+                                                    return "";
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
-        k[j]=0;
-        return k;
+        System.out.println(count);
+        return "";
     }
+
 }
