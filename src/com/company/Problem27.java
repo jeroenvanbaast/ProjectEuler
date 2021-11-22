@@ -1,40 +1,37 @@
 package com.company;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class Problem27 {
 
     // n^n + n * a + b
     // a < 1000, b =< 1000, n > 0
     public static void main(String... args) {
         Problem27 p = new Problem27();
-        p.tryForN(50);
+        System.out.println(p.count());
     }
 
-    public void tryForN(int t) {
+    public int count() {
+        int count = 0;
         int h = 0;
-        int answer = 0;
-        for (int i = 0; i < t; i++) {
-            System.out.println(i);
-            for (int a = 1; a < 1000; a++) {
-                for (int b = 1; b <= 1000; b++) {
-                    int count = 0;
-                    long o = test(a, b, i);
-                    if (isPrime(o)) {
-                        count++;
-                    } else {
-                        if (h < count) {
-                            answer = a * b;
-                            h = count;
-                        }
-                        count = 0;
-                    }
+        int ans = 0;
+        for (int a = -1000; a < 1000; a++) {
+            for (int b = -1000; b < 1000; b++) {
+                int n = 0;
+                while (isPrime(n * n + a * n + b)) {
+                    count++;
+                    n++;
                 }
+                if (count > h) {
+                    h = count;
+                    ans = a * b;
+                }
+                h = Math.max(count, h);
+                count = 0;
             }
         }
-        System.out.println("Solution: " + answer);
-    }
-
-    public long test(int a, int b, int n) {
-        return (long) (Math.pow(n, 2) + n * a + b);
+        return ans;
     }
 
     public boolean isPrime(long d) {
@@ -50,5 +47,17 @@ public class Problem27 {
             }
         }
         return true;
+    }
+
+    public void practice(int n) {
+        int answer = 0;
+        for (int i = 0; i < n; i++) {
+            int t = (i * i) + i + 41;
+            if (isPrime(t)) {
+                answer++;
+            }
+            System.out.println(t + " " + isPrime(t));
+        }
+        System.out.println("Solution: " + answer);
     }
 }
