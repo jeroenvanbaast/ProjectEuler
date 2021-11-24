@@ -17,12 +17,10 @@ public class Problem31 {
                     for (int ten = 0; ten <= a / 10; ten++) {
                         for (int five = 0; five <= a / 5; five++) {
                             for (int two = 0; two <= a / 2; two++) {
-                                for (int one = 0; one <= a; one++) {
-                                    int sum = oneHundred * 100 + fifty * 50 + twenty * 20 + ten * 10 + five * 5 + two * 2 + one;
-                                    if (sum == 200) {
+                                    int sum = oneHundred * 100 + fifty * 50 + twenty * 20 + ten * 10 + five * 5 + two * 2;
+                                    if (sum <= 200) {
                                         count++;
-                                        break;
-                                    } else if (sum > 200) {
+                                    } else {
                                         break;
                                     }
                                 }
@@ -31,7 +29,6 @@ public class Problem31 {
                     }
                 }
             }
-        }
         System.out.println(count);
     }
 }
