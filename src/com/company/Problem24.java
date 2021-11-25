@@ -7,11 +7,37 @@ import java.util.List;
 
 public class Problem24 {
 
+    private int count = 0;
+
     // 012   021   102   120   201   210
     public static void main(String... args) {
         Problem24 p = new Problem24();
-        p.solution(10);
+//        p.solution(10);
+        p.solution();
     }
+
+    //Better
+    private void solution() {
+        pandigital("", Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"));
+    }
+
+    private void pandigital(String pandigital, List<String> toAdd) {
+        if (toAdd.isEmpty()) {
+            count++;
+            if (count == 1_000_000) {
+                System.out.println(pandigital);
+            }
+            return;
+        } else {
+            for (String add : toAdd) {
+                List<String> stillToAdd = new ArrayList<>(toAdd);
+                stillToAdd.remove(add);
+                pandigital(pandigital + add, stillToAdd);
+            }
+        }
+
+    }
+
 
     // Brute force
     public String solution(int a) {
@@ -30,7 +56,7 @@ public class Problem24 {
                                                 if (test.size() == 10) {
                                                     count++;
                                                 }
-                                                if(count == 1_000_000){
+                                                if (count == 1_000_000) {
                                                     System.out.println("" + i + ii + iii + iiii + iiiii + iiiiii + iiiiiii + iiiiiiii + iiiiiiiii + iiiiiiiiii);
                                                     System.out.println(count);
                                                     return "";
