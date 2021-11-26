@@ -57,19 +57,4 @@ public class Problem50 {
         }
         return primes;
     }
-
-    public boolean isPrime(long d) {
-        if (d <= 1) {
-            return false;
-        }
-        if (d == 2) {
-            return true;
-        }
-        for (int i = 2; i < d - 1; i++) {
-            if (d % i == 0) {
-                return false;
-            }
-        }
-        return true;
-    }
 }
