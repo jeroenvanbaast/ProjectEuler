@@ -105,34 +105,6 @@ public class Problem61 {
         return false;
     }
 
-//    private boolean check(ArrayList<Integer> a) {
-//        boolean tri = false;
-//        boolean sq = false;
-//        boolean pent = false;
-//        boolean hex = false;
-//        boolean hept = false;
-//        HashSet<Integer> set = new HashSet<>();
-//        for (int i : a) {
-//            set.add(i);
-//            if (triangles.contains(i)) {
-//                tri = true;
-//            }
-//            if (squares.contains(i)) {
-//                sq = true;
-//            }
-//            if (pentagonal.contains(i)) {
-//                pent = true;
-//            }
-//            if (hexagonal.contains(i)) {
-//                hex = true;
-//            }
-//            if (heptagonal.contains(i)) {
-//                hept = true;
-//            }
-//        }
-//        return tri && sq && pent && hex && hept && set.size()==6;
-//    }
-
     private void output(String s) {
         for (int i = 4; i < s.length(); i += 5) {
             s = s.substring(0, i) + " " + s.substring(i);
