@@ -1,11 +1,3 @@
 
 *.class
-*.class
-*.class
-*.class
-*.class
-*.class
-out/production/ProjectEuler/com/company/Problem14.class
-out/production/ProjectEuler/files/poker.txt
-out/production/ProjectEuler/com/company/adventofcode/test.txt
-out/production/ProjectEuler/com/company/adventofcode/day2.txt
+out/*
