@@ -26,11 +26,7 @@ public class Day6 {
 
     private void test(HashMap<Long, Long> map, int days) {
         if (days == 0) {
-            Long count =0L;
-            for(Long v : map.values()){
-                count+=v;
-            }
-            System.out.println("Solution: " + count);
+            System.out.println("Solution: " + map.values().stream().mapToLong(a->a).sum());
             return;
         }
         HashMap<Long, Long> coppy = new HashMap<>();
