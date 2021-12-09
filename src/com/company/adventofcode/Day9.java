@@ -19,21 +19,17 @@ public class Day9 {
     }
 
     private void solution(int[][] input) {
-        int x = input.length;
-        int y = input[0].length;
         int basinCount = 0;
-        for (int i = 0; i < x; i++) {
-            for (int j = 0; j < y; j++) {
+        for (int i = 0; i < input.length; i++) {
+            for (int j = 0; j < input[0].length; j++) {
                 int current = input[i][j];
-                if ((j != 0 && input[i][j - 1] > current) && (j < y - 1 && input[i][j + 1] > current) &&
-                        (i != 0 && input[i - 1][j] > current) && (i < x - 1 && input[i + 1][j] > current)) {
+                if (current!=-1 && current!= 9) {
                     basins.add(0);
                     basinSize(input, i, j, basinCount++);
                 }
             }
         }
         System.out.println("Solution: " + basins.stream().sorted(Collections.reverseOrder()).limit(3).mapToInt(s -> s).reduce(1, (a, b) -> a * b));
-
     }
 
     private void basinSize(int[][] map, int i, int j, int index) {
