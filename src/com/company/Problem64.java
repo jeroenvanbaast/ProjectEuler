@@ -37,7 +37,7 @@ public class Problem64 {
             if(count%2 !=0){
                 oddCount++;
             }
-//            System.out.println(i +" " + output.substring(0, output.length() - 1) + ")]" + " Count: " + count);
+            System.out.println(i +" " + output.substring(0, output.length() - 1) + ")]" + " Count: " + count);
         }
         System.out.println("Solution: " + oddCount);
     }
