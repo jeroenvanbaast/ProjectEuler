@@ -11,24 +11,14 @@ public class Day9 {
 
     ArrayList<Integer> basins = new ArrayList<>();
 
-    // 1019494;
     public static void main(String[] args) throws IOException {
-        ArrayList<String> input = new ArrayList<>(Files.readAllLines(Path.of("src/com/company/adventofcode/day9.txt")));
+        int[][] input = Arrays.stream(Files.readString(Path.of("src/com/company/adventofcode/day9.txt")).split("\r\n"))
+                .map(r ->Arrays.stream(r.split("")).mapToInt(Integer::parseInt).toArray())
+                .toArray(int[][]::new);
         new Day9().solution(input);
     }
 
-    private int[][] makeMap(ArrayList<String> input) {
-        int[][] toReturn = new int[input.size()][input.get(0).length()];
-        int i = 0;
-        for (String s : input) {
-            toReturn[i] = s.chars().map(c -> Integer.parseInt(""+(char)c)).toArray();
-            i++;
-        }
-        return toReturn;
-    }
-
-    private void solution(ArrayList<String> z) {
-        int[][] input = makeMap(z);
+    private void solution(int[][] input) {
         int x = input.length;
         int y = input[0].length;
         int basinCount = 0;
