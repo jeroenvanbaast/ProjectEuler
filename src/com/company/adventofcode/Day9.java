@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class Day9 {
@@ -13,25 +14,21 @@ public class Day9 {
     // 1019494;
     public static void main(String[] args) throws IOException {
         ArrayList<String> input = new ArrayList<>(Files.readAllLines(Path.of("src/com/company/adventofcode/day9.txt")));
-        Day9 day9 = new Day9();
-        day9.solution(day9.makeMap(input));
+        new Day9().solution(input);
     }
 
     private int[][] makeMap(ArrayList<String> input) {
         int[][] toReturn = new int[input.size()][input.get(0).length()];
         int i = 0;
         for (String s : input) {
-            int j = 0;
-            for (char c : s.toCharArray()) {
-                toReturn[i][j] = Integer.parseInt("" + c);
-                j++;
-            }
+            toReturn[i] = s.chars().map(c -> Integer.parseInt(""+(char)c)).toArray();
             i++;
         }
         return toReturn;
     }
 
-    private void solution(int[][] input) {
+    private void solution(ArrayList<String> z) {
+        int[][] input = makeMap(z);
         int x = input.length;
         int y = input[0].length;
         int basinCount = 0;
