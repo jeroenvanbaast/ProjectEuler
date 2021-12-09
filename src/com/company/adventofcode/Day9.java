@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.stream.Collectors;
 
 public class Day9 {
 
@@ -47,9 +45,7 @@ public class Day9 {
                 }
             }
         }
-        Collections.sort(basins);
-        int k = basins.size()-1;
-        System.out.println("Solution: " + (basins.get(k--) * basins.get(k--) * basins.get(k)));
+        System.out.println("Solution: " + basins.stream().sorted(Collections.reverseOrder()).limit(3).mapToInt(s -> s).reduce(1, (a, b) -> a * b));
 
     }
 
@@ -57,19 +53,21 @@ public class Day9 {
         if (map[i][j] == -1) {
             return;
         }
-        basins.set(index, basins.get(index) + 1);
-        map[i][j] = -1;
-        if (j != 0 && map[i][j - 1] != 9) {
-            basinSize(map, i, j-1, index);
-        }
-        if (j < map[0].length - 1 && map[i][j + 1] != 9) {
-            basinSize(map, i, j+1, index);
-        }
-        if (i != 0 && map[i - 1][j] != 9) {
-            basinSize(map, i-1, j, index);
-        }
-        if (i < map.length - 1 && map[i + 1][j] != 9) {
-            basinSize(map, i+1, j, index);
+        if (map[i][j] != 9) {
+            basins.set(index, basins.get(index) + 1);
+            map[i][j] = -1;
+            if (j != 0) {
+                basinSize(map, i, j - 1, index);
+            }
+            if (j < map[0].length - 1) {
+                basinSize(map, i, j + 1, index);
+            }
+            if (i != 0) {
+                basinSize(map, i - 1, j, index);
+            }
+            if (i < map.length - 1) {
+                basinSize(map, i + 1, j, index);
+            }
         }
     }
 }
