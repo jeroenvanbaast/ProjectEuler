@@ -9,8 +9,6 @@ import java.util.Collections;
 
 public class Day9 {
 
-    ArrayList<Integer> basins = new ArrayList<>();
-
     public static void main(String[] args) throws IOException {
         int[][] input = Arrays.stream(Files.readString(Path.of("src/com/company/adventofcode/day9.txt")).split("\r\n"))
                 .map(r ->Arrays.stream(r.split("")).mapToInt(Integer::parseInt).toArray())
@@ -19,6 +17,7 @@ public class Day9 {
     }
 
     private void solution(int[][] input) {
+        ArrayList<Integer> basins = new ArrayList<>();
         for (int i = 0; i < input.length; i++) {
             for (int j = 0; j < input[0].length; j++) {
                 int current = input[i][j];
