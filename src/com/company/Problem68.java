@@ -6,48 +6,38 @@ import java.util.List;
 
 public class Problem68 {
 
-    ArrayList<String> options = new ArrayList<>();
     int size = 5;
 
     public static void main(String[] args) {
         Problem68 p = new Problem68();
-        p.solution(Arrays.asList(6, 5, 4, 3, 2, 1));
+        p.solution(Arrays.asList(10,9,8,7,6, 5, 4, 3, 2, 1));
     }
 
     private void solution(List<Integer> input) {
         test("", input);
-        outer:
-        for (String s : options) {
-            int[][] tmp = doMagic(s);
-            int first = tmp[0][0];
-            for (int[] ar : tmp) {
-                if (ar[0] < first) {
-                    continue outer;
-                }
-            }
-            System.out.println(outPut(tmp));
-        }
     }
 
     private Long valueOf(int[][] input) {
+        int lowestI = 0;
+        int lowest = 999999;
+        for(int i =0; i< input.length; i++){
+            if(input[i][0] < lowest){
+                lowest = input[i][0];
+                lowestI = i;
+            }
+        }
+        int[][] tmp = new int[input.length][input[0].length];
+        for(int i =0; i< input.length; i++){
+            int newIndex = lowestI+i > input.length-1 ? lowestI+i-input.length : lowestI+i;
+            tmp[i] = input[newIndex];
+        }
         String toReturn = "";
-        for (int[] ar : input) {
+        for (int[] ar : tmp) {
             for (int i : ar) {
                 toReturn += i;
             }
         }
         return Long.parseLong(toReturn);
-    }
-
-    private String outPut(int[][] sol) {
-        String toReturn = "";
-        for (int[] ar : sol) {
-            for (int i : ar) {
-                toReturn += i + ",";
-            }
-            toReturn += "; ";
-        }
-        return toReturn;
     }
 
     private int[][] doMagic(String s) {
@@ -78,7 +68,8 @@ public class Problem68 {
     private void test(String s, List<Integer> toPlace) {
         if (toPlace.size() == 0) {
             if (check(s)) {
-                options.add(s);
+                System.out.println(valueOf(doMagic(s)));
+                System.exit(0);
             }
             return;
         }
