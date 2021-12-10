@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
@@ -18,32 +17,18 @@ public class Day10 {
     private void solution(ArrayList<String> test) {
         int ans = 0;
         String b = "0([{<";
+        int[] points = new int[]{3, 57, 1197, 25137};
         ArrayList<Long> scores = new ArrayList<>();
         outer:
         for (String line : test) {
-            Stack<String> a = new Stack();
+            Stack<Character> a = new Stack<>();
             for (char c : line.toCharArray()) {
-                String s = "" + c;
-                if ("({[<".contains(s)) {
-                    a.add(s);
-                } else if (s.equals(")")) {
-                    if (!a.pop().equals("(")) {
-                        ans += 3;
-                        continue outer;
-                    }
-                } else if (s.equals("]")) {
-                    if (!a.pop().equals("[")) {
-                        ans += 57;
-                        continue outer;
-                    }
-                } else if (s.equals("}")) {
-                    if (!a.pop().equals("{")) {
-                        ans += 1197;
-                        continue outer;
-                    }
-                } else if (s.equals(">")) {
-                    if (!a.pop().equals("<")) {
-                        ans += 25137;
+                if ("({[<".contains(""+c)) {
+                    a.add(c);
+                } else {
+                    int t = (int) c - (int) a.pop();
+                    if (t > 3 || t < 1) {
+                        ans += points[")]}>".indexOf(c)];
                         continue outer;
                     }
                 }
