@@ -51,9 +51,11 @@ public class Problem68 {
             tmp.add(toAdd);
         }
         int[][] sol = new int[size][3];
+        // Fill outer circle
         for (int i = 0; i < size; i++) {
             sol[i][0] = tmp.get(i);
         }
+        // Fill inner circle
         for (int i = size; i < size * 2; i++) {
             sol[i - size][1] = tmp.get(i);
             if (i == (size * 2) - 1) {
