@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class Day13 {
 
@@ -26,9 +27,7 @@ public class Day13 {
                 boolean[][] botHalf = Arrays.copyOfRange(paper, line + 1, paper.length);
                 for (int i = topHalf.length - 1; i >= 0; i--) {
                     for (int k = 0; k < topHalf[0].length; k++) {
-                        if (topHalf[i][k] || botHalf[topHalf.length-i-1][k]) {
-                            topHalf[i][k] = true;
-                        }
+                        topHalf[i][k] = botHalf[topHalf.length - i - 1][k] || topHalf[i][k];
                     }
                 }
                 paper = topHalf;
@@ -41,9 +40,7 @@ public class Day13 {
                 }
                 for (int i = 0; i < leftHalf.length; i++) {
                     for (int k = leftHalf[0].length - 1; k >= 0; k--) {
-                        if (leftHalf[i][k] || rightHalf[i][leftHalf[0].length-k-1]) {
-                            leftHalf[i][k] = true;
-                        }
+                        leftHalf[i][k] = leftHalf[i][k] || rightHalf[i][leftHalf[0].length - k - 1];
                     }
                 }
                 paper = leftHalf;
@@ -51,13 +48,8 @@ public class Day13 {
             System.out.println();
         }
         output(paper);
-        int count = 0;
-        for (boolean[] bArray : paper) {
-            for (boolean b : bArray) {
-                count += b ? 1 : 0;
-            }
-        }
-        System.out.println("Solution1: " + count);
+        System.out.println("Solution1: " + Arrays.stream(paper).flatMap(x -> IntStream.range(0, x.length)
+                .mapToObj(idx -> x[idx]).filter(a -> a)).count());
     }
 
 
