@@ -11,13 +11,12 @@ public class Day13 {
 
     public static void main(String[] args) throws IOException {
         ArrayList<String> input = new ArrayList<>(Files.readAllLines(Path.of("src/com/company/adventofcode/day13.txt")));
-        new Day13().solution(input, 12);
+        new Day13().solution(input, (int) input.stream().filter(s -> s.contains("=")).count());
     }
 
     private void solution(ArrayList<String> input, int folds) {
         ArrayList<String> foldLines = new ArrayList<>(input.subList(input.size() - folds, input.size()));
-        input.removeAll(foldLines);
-        input.remove(input.size() - 1);
+        input.removeAll(input.subList(input.size()-folds-1, input.size()));
         boolean[][] paper = dotPaper(input);
         for (String fold : foldLines) {
             String[] parts = fold.split(" ");
@@ -45,30 +44,16 @@ public class Day13 {
                 }
                 paper = leftHalf;
             }
-            System.out.println();
         }
-        output(paper);
+        Arrays.stream(paper).forEach(x -> System.out.println(IntStream.range(0, x.length)
+                .mapToObj(idx -> x[idx]).map(a-> a?"#" : " ").reduce((a,b) -> a+b).get()));
         System.out.println("Solution1: " + Arrays.stream(paper).flatMap(x -> IntStream.range(0, x.length)
                 .mapToObj(idx -> x[idx]).filter(a -> a)).count());
     }
 
-
-    private void output(boolean[][] paper) {
-        for (boolean[] bArray : paper) {
-            String tmp = "";
-            for (boolean b : bArray) {
-                tmp += b ? "#" : " ";
-            }
-            System.out.println(tmp);
-        }
-    }
-
     private boolean[][] dotPaper(ArrayList<String> input) {
         boolean[][] paper = new boolean[15000][11000];
-        for (String s : input) {
-            String[] cords = s.split(",");
-            paper[Integer.parseInt(cords[1])][Integer.parseInt(cords[0])] = true;
-        }
+        input.forEach(a -> paper[Integer.parseInt(a.split(",")[1])][Integer.parseInt(a.split(",")[0])] = true);
         return paper;
     }
 }
