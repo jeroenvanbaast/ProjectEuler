@@ -8,7 +8,42 @@ public class Problem69 {
 
     public static void main(String[] args) {
         Problem69 problem69 = new Problem69();
+        problem69.betterSolution(1_000_000);
         problem69.solution(1_000_000);
+    }
+
+    private void betterSolution(int limit){
+        int ans =1;
+        ArrayList<Integer> primes = primes(100);
+        int i =0;
+        while(true){
+            ans*= primes.get(i);
+            if(ans > limit){
+                System.out.println("Solution: " + (ans/primes.get(i)));
+                return;
+            }
+            i++;
+        }
+    }
+
+    public ArrayList<Integer> primes(int n) {
+        boolean[] notPrime = new boolean[n];
+        for (int i = 2; i < n; i++) {
+            if (notPrime[i]) {
+                continue;
+            }
+            for (int j = i + i; j < n; j += i) {
+                notPrime[j] = true;
+            }
+
+        }
+        ArrayList<Integer> primes = new ArrayList<>();
+        for (int i = 2; i < notPrime.length; i++) {
+            if (!notPrime[i]) {
+                primes.add(i);
+            }
+        }
+        return primes;
     }
 
     private void solution(int maxN) {
@@ -45,19 +80,5 @@ public class Problem69 {
         }
         return toReturn.size();
     }
-
-//    private double relativePrimes(int n) {
-//        List<Integer> toReturn = new ArrayList<>();
-//        outer:
-//        for (int i = 1; i <= n; i++) {
-//            for (int j = 2; j <= i; j++) {
-//                if (i % j == 0 && n % j == 0) {
-//                        continue outer;
-//                }
-//            }
-//            toReturn.add(i);
-//        }
-//        return toReturn.size();
-//    }
 
 }
