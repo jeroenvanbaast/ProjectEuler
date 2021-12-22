@@ -53,7 +53,7 @@ public class Problem69 {
         for (int n = 2; n <= maxN; n+=t) {
             double tmp = n / relativePrimes(n);
             if (tmp > h) {
-                System.out.println(n);
+//                System.out.println(n);
                 h = tmp;
                 hN = n;
                 t = n;
