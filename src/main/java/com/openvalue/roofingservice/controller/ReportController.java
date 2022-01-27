@@ -31,7 +31,7 @@ public class ReportController {
     }
 
     @PutMapping
-    public ResponseEntity<Report> createReport(@RequestBody Report report) {
+    public ResponseEntity<Report> updateReport(@RequestBody Report report) {
         if (report.getCustomerName() != null && !report.getCustomerName().isEmpty()) {
             return ResponseEntity.ok(reportService.createReport(report));
         } else {
