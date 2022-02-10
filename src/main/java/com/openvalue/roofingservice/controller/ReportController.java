@@ -44,11 +44,12 @@ public class ReportController {
         try {
             File pdf = reportService.generatePDF(id);
             InputStreamResource resource = new InputStreamResource(new FileInputStream(pdf));
-            return ResponseEntity.ok()
+            ResponseEntity<InputStreamResource> responseEntity = ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + pdf.getName())
                     .contentType(MediaType.APPLICATION_PDF)
                     .contentLength(pdf.length())
                     .body(resource);
+            return responseEntity;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,7 +74,7 @@ public class ReportController {
                                               @RequestParam(value = "filepath") String filePath,
                                               @RequestParam(value = "reportid") String reportId,
                                               @RequestParam(value = "roofsurfaceid", required = false) String roofSurfaceId) {
-        return reportService.uploadImage(file, source, filePath, reportId, roofSurfaceId);
+         return reportService.uploadImage(file, source, filePath, reportId, roofSurfaceId);
     }
 
     @GetMapping("/all")
