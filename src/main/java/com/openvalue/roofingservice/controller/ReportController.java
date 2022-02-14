@@ -70,7 +70,7 @@ public class ReportController {
      * @return returns a ResponseEntity with the status of the request
      */
     @PostMapping("/img")
-    public ResponseEntity<String> uploadImage(@RequestBody MultipartFile file, @RequestParam(value = "source") ImageSource source,
+    public ResponseEntity<Report> uploadImage(@RequestBody MultipartFile file, @RequestParam(value = "source") ImageSource source,
                                               @RequestParam(value = "filepath") String filePath,
                                               @RequestParam(value = "reportid") String reportId,
                                               @RequestParam(value = "roofsurfaceid", required = false) String roofSurfaceId) {
