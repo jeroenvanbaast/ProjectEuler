@@ -50,10 +50,9 @@ public class ReportController {
                     .contentLength(pdf.length())
                     .body(resource);
             return responseEntity;
-
         } catch (Exception e) {
             e.printStackTrace();
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "unable to generate PDF", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "unable to generate PDF, " + e.getMessage(), e);
         }
     }
 
