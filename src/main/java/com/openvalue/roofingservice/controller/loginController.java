@@ -24,7 +24,6 @@ public class loginController {
 
     @GetMapping("/")
     public String helloWorld() {
-        System.out.println("WERK");
         return "Hello world";
     }
 
