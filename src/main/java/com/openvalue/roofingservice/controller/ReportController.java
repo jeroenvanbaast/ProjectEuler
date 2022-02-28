@@ -2,6 +2,7 @@ package com.openvalue.roofingservice.controller;
 
 import com.openvalue.roofingservice.model.ImageSource;
 import com.openvalue.roofingservice.model.Report;
+import com.openvalue.roofingservice.service.JWTService;
 import com.openvalue.roofingservice.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -22,10 +23,12 @@ import java.util.List;
 @RequestMapping(path = "api/report")
 public class ReportController {
     private final ReportService reportService;
+    private final JWTService jwtService;
 
     @Autowired
-    public ReportController(ReportService reportService) {
+    public ReportController(ReportService reportService, JWTService jwtService) {
         this.reportService = reportService;
+        this.jwtService = jwtService;
     }
 
     @PutMapping
@@ -77,8 +80,11 @@ public class ReportController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Report>> getAll() {
-        return ResponseEntity.ok().body(reportService.getAll());
+    public ResponseEntity<List<Report>> getAll(@RequestHeader("AUTHORIZATION") String token) {
+        if(jwtService.verifyJWT(token)){
+            return ResponseEntity.ok().body(reportService.getAll());
+        }
+        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong with the login");
     }
 
     @GetMapping("/id")

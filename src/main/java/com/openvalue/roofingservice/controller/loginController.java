@@ -1,8 +1,14 @@
 package com.openvalue.roofingservice.controller;
 
+import com.openvalue.roofingservice.model.User;
 import com.openvalue.roofingservice.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Optional;
 
 
 @RestController
@@ -34,8 +40,11 @@ public class loginController {
     }
 
     @PostMapping("/code")
-    public String test(@RequestParam(value = "code") String code){
-        loginService.login(code);
-        return "";
+    public ResponseEntity<User> test(@RequestParam(value = "code") String code) {
+        Optional<User> optionalUser = loginService.login(code);
+        if (optionalUser.isPresent()) {
+            return ResponseEntity.ok().body(optionalUser.get());
+        }
+        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong");
     }
 }
